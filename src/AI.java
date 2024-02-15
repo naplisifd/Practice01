@@ -1,2 +1,2 @@
-public class AI {
+public class AI extends Player{
 }
