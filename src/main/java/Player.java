@@ -5,6 +5,7 @@ public class Player {
         this.chips = chips;
     }
     public void Raise(){
+        System.out.println("asasssa");
 
     }
     public void Check(){
