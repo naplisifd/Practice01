@@ -9,7 +9,7 @@ public class Player {
         this.chips = chips;
     }
     public static void Raise(){
-        System.out.println("asasssa");
+        System.out.println("raised");
 
     }
     public void Check(){
