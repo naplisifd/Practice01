@@ -3,12 +3,16 @@ public class Player {
     public static void Player(){
         System.out.println("asssa");
     }
-    public int chips;
+    public static int chips;
 
-    public void setChips(int chips) {
-        this.chips = chips;
+    public void setchips(int chips) {
+        System.out.println("musa is a monkey");
+        //this.chips = chips;
     }
-    public static void Raise(){
+    public static int getchips(){
+        return chips;
+    }
+    public static void Raise(int chips){
         System.out.println("raised");
 
     }
