@@ -12,13 +12,14 @@ public class Player {
         System.out.println("raised");
 
     }
-    public void Check(){
+    public static void Check(){
 
     }
-    public void Call(){
+    public static void Call(){
 
     }
-    public void AllIn(){
+    public static void AllIn(){
 
     }
+    public static void Fold(){}
 }

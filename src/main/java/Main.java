@@ -4,11 +4,24 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        new Player();
+        new Person();
+        //checks for raise
         System.out.println("what do you want to do");
         String action = input.nextLine();
         if (action.equalsIgnoreCase("raise")){
-            Player.Raise();
+            Person.Raise();
+        }
+        if (action.equalsIgnoreCase("check")){
+            Person.Check();
+        }
+        if (action.equalsIgnoreCase("fold")){
+            Person.Fold();
+        }
+        if (action.equalsIgnoreCase("call")){
+            Person.Call();
+        }
+        if (action.equalsIgnoreCase("all in")){
+            Person.AllIn();
         }
     }
 }
