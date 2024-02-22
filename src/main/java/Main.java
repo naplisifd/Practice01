@@ -1,11 +1,25 @@
 import java.util.Scanner;
 public class Main {
 
-    public Player player1 = new Player();
-    public static int chips =Player.getchips();
-    player1.setchips(int(1));
+    public static Player player1 = new Player();
+    //public static int chips =Player.getchips();
+
+    public static Player player2 = new Player();
+    //public static int chips2 =Player.getchips();
+
+
+
+
 
     public static void main(String[] args) {
+        player1.setchips(10);
+        System.out.println(player1.chips);
+        System.out.println(player2.chips);
+       // chips2=11;
+        player2.setchips(11);
+       // player1.chips=4;
+        System.out.println(player1.chips);
+        System.out.println(player2.chips);
         Scanner input = new Scanner(System.in);
         new Person();
         //checks for raise
