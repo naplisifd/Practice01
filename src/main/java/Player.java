@@ -20,7 +20,7 @@ public class Player {
         System.out.println(raiseamount);
          chips = chips - raiseamount;
          dchips = dchips + raiseamount;
-        return new int[]{chips, dchips};
+        return new int[]{chips, dchips, raiseamount}; //returns all 3
 
     }
     public static void Check(){
