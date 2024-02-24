@@ -27,26 +27,28 @@ public class Main {
         middle.setDealerchips(0);
         for (int w=0; w<pcount; w++){
             players[w].setchips(500);
+            players[w].setIn_game(true);
         }
         int minraise = 0;
         /*for (int y=0; y<pcount; y++) {
             System.out.println("player" +y+" starts with " + players[y].chips + " chips");
         }*/
         System.out.println("the pot starts with " +middle.chips +" chips");
+        for (int y=0; y<pcount; y++) {
+            System.out.println("player" +y+" starts with " + players[y].chips + " chips");
+        }
         boolean gameover = false;
         while (gameover==false) {
             boolean turn_over = false;
-            for (int y=0; y<pcount; y++) {
-                System.out.println("player" +y+" starts with " + players[y].chips + " chips");
-            }
+
             for (int i=0; i<pcount; i++) {
 
                 //makes object current player which is whatever object players[i]
                 Player currentPlayer = players[i];
 
-                System.out.println("it is player "+(i+1)+"'s turn");
                 turn_over = false;
-                while (turn_over == false) {
+                while (turn_over == false /*is players turn*/ && players[i].In_game==true/*player hasn't folded*/) {
+                    System.out.println("it is player "+(i+1)+"'s turn");
                     //checks for raise
                     System.out.println("what do you want to do");
                     String action = input.nextLine();
@@ -61,19 +63,36 @@ public class Main {
                         System.out.println("the pot now has " + middle.chips + " chips");
 
                         turn_over = true;
-                    } else if (action.equalsIgnoreCase("check")) {
+                    }
+
+                    else if (action.equalsIgnoreCase("check") && minraise<=0) {
                         Person.Check();
                         turn_over = true;
-                    } else if (action.equalsIgnoreCase("fold")) {
-                        Person.Fold();
+                    }
+                    else if (action.equalsIgnoreCase("check") && minraise>0) {//cant check bc already been raised
+                        System.out.println("you can not check");
+                        turn_over= false;
+                    }
+                    else if (action.equalsIgnoreCase("fold")) {
+                        players[i].setIn_game(false);
                         turn_over = true;
-                    } else if (action.equalsIgnoreCase("call")) {
-                        Person.Call();
+                    }
+
+                    else if (action.equalsIgnoreCase("call")) {
+                        int[] newvalues = Person.Call(players[i].chips, middle.chips, minraise);
+                        players[i].setchips(newvalues[0]);
+                        middle.setDealerchips(newvalues[1]);
+                        System.out.println("you now have " + players[i].chips + " chips");
+                        System.out.println("the pot now has " + middle.chips + " chips");
                         turn_over = true;
-                    } else if (action.equalsIgnoreCase("all in")) {
+                    }
+
+                    else if (action.equalsIgnoreCase("all in")) {
                         Person.AllIn();
                         turn_over = true;
-                    } else {
+                    }
+
+                    else {
                         System.out.println("you can, raise, check, fold, call or go all in");
                     }
                 }
