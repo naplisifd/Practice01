@@ -22,12 +22,21 @@ public class Player {
 
 
 
-    public static int[] Raise(int chips, int dchips){
-        System.out.println("by how much");
-        Scanner raiser = new Scanner(System.in);
-        int raiseamount = Integer.parseInt(raiser.nextLine());
-         chips = chips - raiseamount;
-         dchips = dchips + raiseamount;
+    public static int[] Raise(int chips, int dchips, boolean allin){
+        int raiseamount = 0;
+        if (allin== false){
+            System.out.println("by how much");
+            Scanner raiser = new Scanner(System.in);
+             raiseamount = Integer.parseInt(raiser.nextLine());
+        }else{
+             raiseamount = chips;
+        }
+        if (raiseamount>chips){
+            System.out.println("you dont have that much");
+        }else {
+            chips = chips - raiseamount;
+            dchips = dchips + raiseamount;
+        }
         return new int[]{chips, dchips, raiseamount}; //returns all 3
 
     }
@@ -35,8 +44,14 @@ public class Player {
 
     }
     public static int[] Call(int chips, int dchips, int amount){
-        dchips= dchips + amount;
-        chips = chips - amount;
+        if (chips - amount >= 0){
+            dchips= dchips + amount;
+            chips = chips - amount;
+        }
+        else{
+            chips=0;
+            dchips= dchips+chips;
+        }
         return new int[]{chips, dchips};
     }
     public static void AllIn(){

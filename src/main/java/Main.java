@@ -42,6 +42,7 @@ public class Main {
             boolean turn_over = false;
 
             for (int i=0; i<pcount; i++) {
+                boolean allin = false;
 
                 //makes object current player which is whatever object players[i]
                 Player currentPlayer = players[i];
@@ -54,15 +55,19 @@ public class Main {
                     String action = input.nextLine();
                     if (action.equalsIgnoreCase("raise")) {
                         //puts the returned values into array updatechips
-                        int[] updatedChips = Player.Raise(players[i].chips, middle.chips);
-                        currentPlayer.chips = updatedChips[0];//updated chips0 = returned value
-                        middle.chips = updatedChips[1];
-                         minraise = updatedChips[2];
+                        int[] updatedChips = Player.Raise(players[i].chips, middle.chips, allin);
+                        if(updatedChips[2] >= minraise){
+                            currentPlayer.chips = updatedChips[0];//updated chips0 = returned value
+                            middle.chips = updatedChips[1];
+                            minraise = updatedChips[2];
 
-                        System.out.println("you now have " + players[i].chips + " chips");
-                        System.out.println("the pot now has " + middle.chips + " chips");
-
-                        turn_over = true;
+                            System.out.println("you now have " + players[i].chips + " chips");
+                            System.out.println("the pot now has " + middle.chips + " chips");
+                            turn_over = true;
+                        }
+                        else{
+                            System.out.println("you have to raise at least "+ minraise);
+                        }
                     }
 
                     else if (action.equalsIgnoreCase("check") && minraise<=0) {
@@ -88,8 +93,17 @@ public class Main {
                     }
 
                     else if (action.equalsIgnoreCase("all in")) {
+                         allin = true;
                         Person.AllIn();
                         turn_over = true;
+                        //puts the returned values into array updatechips
+                        int[] updatedChips = Player.Raise(players[i].chips, middle.chips, allin);
+                        currentPlayer.chips = updatedChips[0];//updated chips0 = returned value
+                        middle.chips = updatedChips[1];
+                        minraise = updatedChips[2];
+                        System.out.println("you now have " + players[i].chips + " chips");
+                        System.out.println("the pot now has " + middle.chips + " chips");
+
                     }
 
                     else {
