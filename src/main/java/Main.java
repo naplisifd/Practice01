@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.Stack;
+
 public class Main {
 
     public static Player player1 = new Player();
@@ -14,6 +16,8 @@ public class Main {
 
 
     public static void main(String[] args) {
+        /*Stack<Integer> deck_n =*/dealer.deckmaker();
+       // System.out.println(deck_n);
         Scanner input = new Scanner(System.in);
         System.out.println("how many players, max 5");
         //takes count
