@@ -1,33 +1,27 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class dealer {
     public Stack Deck_n;
     public Stack Deck_s;
 
-    public static Stack<Integer> deckmaker(){
-        Stack<Integer> Deck_n = new Stack<>();
-        int[] checker = new int[13];
-        for (int i = 0; i < 13; i++) {
-            boolean doubled = false;
-            Random random = new Random();
-            int cardnumber;
-            do {
-                cardnumber = random.nextInt(13) + 1;
-                doubled = false;
-                for (int w = 0; w < i; w++) {
-                    if (checker[w] == cardnumber) {
-                        doubled = true;
-                        break;
-                    }
-                }
-            } while (doubled);
-            checker[i] = cardnumber;
-            Deck_n.push(cardnumber);
+    public static Stack<int[]> deckmaker(){
+        Stack<int[]> Deck_n = new Stack<>();
+        int[][] unshuffled = new int [52] [52];
+        int x =0;
+        for (int i=1; i<5; i++){
+            for (int w=1; w<14; w++){
+                unshuffled[x] = new int[]{w,i};
+                x++;
+            }
         }
-        for (int x = 0; x < 13; x++) {
-            System.out.println(Deck_n.pop());
+        Random random = new Random();
+        String checker = "";
+        int randomNumber = random.nextInt(52) + 1;
+        for (int y=0; y<52; y++){
+
         }
         return Deck_n;
     }
