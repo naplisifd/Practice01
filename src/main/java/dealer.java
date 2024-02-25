@@ -17,11 +17,24 @@ public class dealer {
                 x++;
             }
         }
+
         Random random = new Random();
         String checker = "";
-        int randomNumber = random.nextInt(52) + 1;
-        for (int y=0; y<52; y++){
 
+        for (int y=0; y<100; y++){
+            int randomNumber1 = random.nextInt(51) + 0;
+            int randomNumber2 = random.nextInt(51) + 0;
+            int saver1 = unshuffled[randomNumber1][0];
+            int saver2 = unshuffled[randomNumber1][1];
+            unshuffled[randomNumber1][0] = unshuffled[randomNumber2][0];
+            unshuffled[randomNumber1][1] = unshuffled[randomNumber2][1];
+            unshuffled[randomNumber2][0] = saver1;
+            unshuffled[randomNumber2][1] = saver2;
+
+        }
+        for (int p=1; p<52; p++){
+            System.out.println(unshuffled[p][0]);
+            System.out.println(unshuffled[p][1]);
         }
         return Deck_n;
     }
