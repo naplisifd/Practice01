@@ -34,7 +34,15 @@ public class dealer {
         }
         for (int p=1; p<52; p++){
             System.out.println(unshuffled[p][0]);
-            System.out.println(unshuffled[p][1]);
+           if (unshuffled[p][1] == 1){
+               System.out.println("spade");
+           } else if (unshuffled[p][1] == 2) {
+               System.out.println("heart");
+           } else if (unshuffled[p][1] == 3) {
+               System.out.println("diamond");
+           } else if (unshuffled[p][1] == 4) {
+               System.out.println("club");
+           }
         }
         return Deck_n;
     }
