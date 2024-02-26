@@ -16,7 +16,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        /*Stack<Integer> deck_n =*/dealer.deckmaker();
+        int[][] shuffled =dealer.deckmaker();
        // System.out.println(deck_n);
         Scanner input = new Scanner(System.in);
         System.out.println("how many players, max 5");
@@ -32,14 +32,61 @@ public class Main {
         for (int w=0; w<pcount; w++){
             players[w].setchips(500);
             players[w].setIn_game(true);
+            //int [] [] phand = {new int[]{shuffled[w][0]}, new int[]{shuffled[w][1]}};
+            //int [][] p2hand = {new int[]{shuffled[w+1][0]}, new int[]{shuffled[w+1][1]}};
+            //players[w].setPlayerhand(phand);
         }
+        int [] [] phand =new int[5][2];
+       // for (int o=0; o<pcount; o++){
+
+
+       // }
+
         int minraise = 0;
         /*for (int y=0; y<pcount; y++) {
             System.out.println("player" +y+" starts with " + players[y].chips + " chips");
         }*/
         System.out.println("the pot starts with " +middle.chips +" chips");
-        for (int y=0; y<pcount; y++) {
-            System.out.println("player" +y+" starts with " + players[y].chips + " chips");
+        for (int y=2; y<pcount+2; y++) {
+            //System.out.println(phand[0][0]+"abc");
+            phand[0][0] = shuffled[y][0];
+            phand[1][0]=shuffled[y][1];
+            int o=2*y;
+            phand[0][1] = shuffled[o][0];
+            phand[1][1]=shuffled[o][1];
+            players[y-2].setPlayerhand(phand);
+
+           /* System.out.println(phand[0][0]+"a");
+            System.out.println(phand[1][0]+"b");
+            System.out.println(phand[0][1]+"c");
+            System.out.println(phand[1][1]+"d");*/
+
+            //System.out.println("player" +y+" starts with " + players[y-2].chips + " chips and the cards");
+            System.out.println(players[y-2].Playerhand[0][0]);
+
+            if (players[y-2].Playerhand[1][0] == 1){
+                System.out.println("spade");
+            } else if (players[y-2].Playerhand[1][0] == 2) {
+                System.out.println("heart");
+            } else if (players[y-2].Playerhand[1][0] == 3) {
+                System.out.println("diamond");
+            } else if (players[y-2].Playerhand[1][0] == 4) {
+                System.out.println("club");
+            }
+            System.out.println(players[y-2].Playerhand[1][0]);
+            if (players[y-2].Playerhand[1][1] == 1){
+                System.out.println("spade");
+            } else if (players[y-2].Playerhand[1][1] == 2) {
+                System.out.println("heart");
+            } else if (players[y-2].Playerhand[1][1] == 3) {
+                System.out.println("diamond");
+            } else if (players[y-2].Playerhand[1][1] == 4) {
+                System.out.println("club");
+            }
+            phand[0][0] = 0;
+            phand[0][1]=0;
+            phand[1][0] = 0;
+            phand[1][1]=0;
         }
         boolean gameover = false;
         while (gameover==false) {
@@ -75,7 +122,7 @@ public class Main {
                     }
 
                     else if (action.equalsIgnoreCase("check") && minraise<=0) {
-                        Person.Check();
+                        Player.Check();
                         turn_over = true;
                     }
                     else if (action.equalsIgnoreCase("check") && minraise>0) {//cant check bc already been raised
@@ -88,7 +135,7 @@ public class Main {
                     }
 
                     else if (action.equalsIgnoreCase("call")) {
-                        int[] newvalues = Person.Call(players[i].chips, middle.chips, minraise);
+                        int[] newvalues = Player.Call(players[i].chips, middle.chips, minraise);
                         players[i].setchips(newvalues[0]);
                         middle.setDealerchips(newvalues[1]);
                         System.out.println("you now have " + players[i].chips + " chips");
@@ -98,7 +145,7 @@ public class Main {
 
                     else if (action.equalsIgnoreCase("all in")) {
                          allin = true;
-                        Person.AllIn();
+                        Player.AllIn();
                         turn_over = true;
                         //puts the returned values into array updatechips
                         int[] updatedChips = Player.Raise(players[i].chips, middle.chips, allin);

@@ -4,10 +4,9 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public class dealer {
-    public Stack Deck_n;
-    public Stack Deck_s;
 
-    public static Stack<int[]> deckmaker(){
+
+    public static int[][] deckmaker(){
         Stack<int[]> Deck_n = new Stack<>();
         int[][] unshuffled = new int [52] [52];
         int x =0;
@@ -17,7 +16,6 @@ public class dealer {
                 x++;
             }
         }
-
         Random random = new Random();
         String checker = "";
 
@@ -31,7 +29,7 @@ public class dealer {
             unshuffled[randomNumber2][0] = saver1;
             unshuffled[randomNumber2][1] = saver2;
 
-        }
+        }/*
         for (int p=1; p<52; p++){
             System.out.println(unshuffled[p][0]);
            if (unshuffled[p][1] == 1){
@@ -43,8 +41,8 @@ public class dealer {
            } else if (unshuffled[p][1] == 4) {
                System.out.println("club");
            }
-        }
-        return Deck_n;
+        }*/
+        return unshuffled;
     }
 
     public int chips;

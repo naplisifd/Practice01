@@ -20,7 +20,9 @@ public class Player {
         return chips;
     }
 
-
+    public int[] [] Playerhand;
+    public void setPlayerhand(int[] [] Playerhand1){this.Playerhand = Playerhand1;}
+    public int[][]getPlayerhand(){return Playerhand;}
 
     public static int[] Raise(int chips, int dchips, boolean allin){
         int raiseamount = 0;
