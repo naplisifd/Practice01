@@ -7,7 +7,8 @@ public class dealer {
 
 
     public static int[][] deckmaker(){
-        Stack<int[]> Deck_n = new Stack<>();
+
+        //makes an ordered deck
         int[][] unshuffled = new int [52] [52];
         int x =0;
         for (int i=1; i<5; i++){
@@ -16,9 +17,11 @@ public class dealer {
                 x++;
             }
         }
-        Random random = new Random();
-        String checker = "";
 
+
+        Random random = new Random();
+
+        //swaps 2 random cards 100 times
         for (int y=0; y<100; y++){
             int randomNumber1 = random.nextInt(51) + 0;
             int randomNumber2 = random.nextInt(51) + 0;
@@ -29,19 +32,9 @@ public class dealer {
             unshuffled[randomNumber2][0] = saver1;
             unshuffled[randomNumber2][1] = saver2;
 
-        }/*
-        for (int p=1; p<52; p++){
-            System.out.println(unshuffled[p][0]);
-           if (unshuffled[p][1] == 1){
-               System.out.println("spade");
-           } else if (unshuffled[p][1] == 2) {
-               System.out.println("heart");
-           } else if (unshuffled[p][1] == 3) {
-               System.out.println("diamond");
-           } else if (unshuffled[p][1] == 4) {
-               System.out.println("club");
-           }
-        }*/
+        }
+
+
         return unshuffled;
     }
 
