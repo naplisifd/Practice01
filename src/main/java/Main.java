@@ -68,6 +68,8 @@ public class Main {
         String suite ="";
         while (gameover==false) {
             boolean turn_over = false;
+
+
             if (stage==pcount){
                 System.out.println("the flop is ");
                 for(int e=51; e>48; e--){
@@ -81,6 +83,41 @@ public class Main {
                          suite ="clubs";
                     }
                     System.out.println(shuffled[e][0] + " of "+ suite);
+
+                }
+            }
+
+            if (stage==2*pcount){
+                System.out.println("the fourth street is ");
+
+                for(int e=51; e>47; e--){
+                    if (shuffled[e][1] == 1){
+                        suite="spades";
+                    } else if (shuffled[e][1] == 2) {
+                        suite="hearts";
+                    } else if (shuffled[e][1] == 3) {
+                        suite="diamonds";
+                    } else if (shuffled[e][1] == 4) {
+                        suite ="clubs";
+                    }
+                    System.out.println(shuffled[e][0] + " of "+ suite);
+                }
+            }
+
+            if (stage==3*pcount) {
+                System.out.println("the river is ");
+
+                for (int e = 51; e > 46; e--) {
+                    if (shuffled[e][1] == 1) {
+                        suite = "spades";
+                    } else if (shuffled[e][1] == 2) {
+                        suite = "hearts";
+                    } else if (shuffled[e][1] == 3) {
+                        suite = "diamonds";
+                    } else if (shuffled[e][1] == 4) {
+                        suite = "clubs";
+                    }
+                    System.out.println(shuffled[e][0] + " of " + suite);
 
                 }
             }
@@ -210,5 +247,10 @@ public class Main {
                 }
             }
         }
+    }
+
+    public static String win_conditions(){
+        String Winner="";
+        return Winner;
     }
 }
