@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Stack;
 
 public class Main {
 
@@ -73,16 +72,9 @@ public class Main {
             if (stage==pcount){
                 System.out.println("the flop is ");
                 for(int e=51; e>48; e--){
-                    if (shuffled[e][1] == 1){
-                         suite="spades";
-                    } else if (shuffled[e][1] == 2) {
-                         suite="hearts";
-                    } else if (shuffled[e][1] == 3) {
-                         suite="diamonds";
-                    } else if (shuffled[e][1] == 4) {
-                         suite ="clubs";
-                    }
-                    System.out.println(shuffled[e][0] + " of "+ suite);
+                    String suites= dSuitconverter(e,1, shuffled);
+
+                    System.out.println(shuffled[e][0] + " of "+ suites);
 
                 }
             }
@@ -91,16 +83,9 @@ public class Main {
                 System.out.println("the fourth street is ");
 
                 for(int e=51; e>47; e--){
-                    if (shuffled[e][1] == 1){
-                        suite="spades";
-                    } else if (shuffled[e][1] == 2) {
-                        suite="hearts";
-                    } else if (shuffled[e][1] == 3) {
-                        suite="diamonds";
-                    } else if (shuffled[e][1] == 4) {
-                        suite ="clubs";
-                    }
-                    System.out.println(shuffled[e][0] + " of "+ suite);
+                    String suites= dSuitconverter(e,1, shuffled);
+
+                    System.out.println(shuffled[e][0] + " of "+ suites);
                 }
             }
 
@@ -108,16 +93,9 @@ public class Main {
                 System.out.println("the river is ");
 
                 for (int e = 51; e > 46; e--) {
-                    if (shuffled[e][1] == 1) {
-                        suite = "spades";
-                    } else if (shuffled[e][1] == 2) {
-                        suite = "hearts";
-                    } else if (shuffled[e][1] == 3) {
-                        suite = "diamonds";
-                    } else if (shuffled[e][1] == 4) {
-                        suite = "clubs";
-                    }
-                    System.out.println(shuffled[e][0] + " of " + suite);
+                    String suites= dSuitconverter(e,1, shuffled);
+
+                    System.out.println(shuffled[e][0] + " of " + suites);
 
                 }
             }
@@ -139,29 +117,15 @@ public class Main {
                     //holds until something is inputted
                     String confirmer = input.nextLine();
                     //outputs the current players hand
-                    System.out.println(players[i].Playerhand[0][0]);
 
 
                     //converts from code into the name of the suite
-                        if (players[i].Playerhand[1][0] == 1){
-                            System.out.println("spade");
-                        } else if (players[i].Playerhand[1][0] == 2) {
-                            System.out.println("heart");
-                        } else if (players[i].Playerhand[1][0] == 3) {
-                            System.out.println("diamond");
-                        } else if (players[i].Playerhand[1][0] == 4) {
-                            System.out.println("club");
-                        }
-                        System.out.println(players[i].Playerhand[1][0]);
-                        if (players[i].Playerhand[1][1] == 1){
-                            System.out.println("spade");
-                        } else if (players[i].Playerhand[1][1] == 2) {
-                            System.out.println("heart");
-                        } else if (players[i].Playerhand[1][1] == 3) {
-                            System.out.println("diamond");
-                        } else if (players[i].Playerhand[1][1] == 4) {
-                            System.out.println("club");
-                        }
+                    String suit = pSuitconverter(1,0, players, i);
+                    System.out.println(players[i].Playerhand[0][0] + " of "+ suit);
+                     suit = pSuitconverter(1,1, players, i);
+                    System.out.println(players[i].Playerhand[1][0] + " of "+ suit);
+
+
 
 
                     //checks for raise
@@ -249,8 +213,40 @@ public class Main {
         }
     }
 
+
+
+    public static String pSuitconverter(int x, int y, Player[] players, int i){//used for player
+        String suit ="";
+        if (players[i].Playerhand[x][y] == 1){
+            suit ="spades";
+        } else if (players[i].Playerhand[x][y] == 2) {
+            suit= "hearts";
+        } else if (players[i].Playerhand[x][y] == 3) {
+            suit = "diamonds";
+        } else if (players[i].Playerhand[x][y] == 4) {
+            suit = "clubs";
+        }
+        return suit;
+    }
+    public static String dSuitconverter(int x, int y, int[][] shuffled){ //used for dealing
+        String suite ="";
+        if (shuffled[x][y] == 1){
+            suite="spades";
+        } else if (shuffled[x][y] == 2) {
+            suite="hearts";
+        } else if (shuffled[x][y] == 3) {
+            suite="diamonds";
+        } else if (shuffled[x][y] == 4) {
+            suite ="clubs";
+        }
+        return suite;
+    }
+
+
+
     public static String win_conditions(){
         String Winner="";
         return Winner;
     }
+
 }
