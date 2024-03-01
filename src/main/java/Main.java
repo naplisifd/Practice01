@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
@@ -244,9 +245,78 @@ public class Main {
 
 
 
-    public static String win_conditions(){
-        String Winner="";
-        return Winner;
+    public static void comb_checker( Player[] players, int[][] shuffled){
+        flush_checker(players, shuffled);
     }
 
-}
+
+    public static void flush_checker( Player[] players, int[][] shuffled){
+        int clubchecker =0;
+        int heartchecker =0;
+        int diamondchecker =0;
+        int spadechecker=0;
+
+
+        for (int i=1; i<5; i++){
+            for (int x=0; x<2; x++){
+                String suit =pSuitconverter(1, x, players,i);
+                switch (suit){
+                    case "club":
+                        clubchecker++;
+                        break;
+                    case "heart":
+                        heartchecker++;
+                        break;
+                    case "diamond":
+                        diamondchecker++;
+                        break;
+                    case "spade":
+                        spadechecker++;
+                        break;
+                }
+            }
+
+
+            for (int y=51; y>46; y--){
+                String dsuit= dSuitconverter(y, 1, shuffled);
+                switch (dsuit){
+                    case "club":
+                        clubchecker++;
+                        break;
+                    case "heart":
+                        heartchecker++;
+                        break;
+                    case "diamond":
+                        diamondchecker++;
+                        break;
+                    case "spade":
+                        spadechecker++;
+                        break;
+                }
+            }
+            if(clubchecker<4||heartchecker<4||diamondchecker<4||spadechecker<4){
+                players[i].setFlush(true);
+            }
+
+        }
+    }
+
+    public static void straight_checker( Player[] players, int[][] shuffled){
+        for (int i=1; i<5; i++) {
+            int consec =0;
+            int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0]};
+            Arrays.sort(numbers);
+            for (int x=0; x<7;x++){
+                if (numbers[x]==numbers[x+1]-1){
+                    consec++;
+                }
+            }
+            if (consec>4){
+                players[i].setStraight(true);
+            }
+        }
+    }
+
+
+
+    }

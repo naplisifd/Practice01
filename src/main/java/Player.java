@@ -24,6 +24,18 @@ public class Player {
     public void setPlayerhand(int[] [] Playerhand1){this.Playerhand = Playerhand1;}
     public int[][]getPlayerhand(){return Playerhand;}
 
+    public Boolean Straight;
+    public void setStraight(Boolean Straight1){this.Straight = Straight1;}
+    public Boolean getStraight(){return Straight;}
+    public Boolean Flush;
+    public void setFlush(Boolean Flush1){this.Straight = Flush1;}
+    public Boolean getFlush(){return Flush;}
+
+
+
+
+
+
     public static int[] Raise(int chips, int dchips, boolean allin){
         int raiseamount = 0;
         if (allin== false){
