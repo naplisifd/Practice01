@@ -306,17 +306,55 @@ public class Main {
             int consec =0;
             int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0]};
             Arrays.sort(numbers);
+
             for (int x=0; x<7;x++){
                 if (numbers[x]==numbers[x+1]-1){
                     consec++;
                 }
             }
+
             if (consec>4){
                 players[i].setStraight(true);
+            }
+
+        }
+    }
+
+    public static void twopair_checker(Player[] players, int[][] shuffled){
+        int checker=0;
+        int p=0;
+        int q=0;
+        int r=0;
+
+
+        for (int i=1; i<5; i++) {
+            int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0],0};
+            Arrays.sort(numbers);
+            for (int x=0; x<7;x++){
+
+                if (numbers[x] == numbers[x+1] && numbers[x]!=numbers[x+2]){
+
+                    checker++;
+
+                    switch(checker) {
+                        case 1:
+                            p = numbers[x];
+                            break;
+                        case 2:
+                            q=numbers[x];
+                            break;
+                        case 3:
+                            r=numbers[x];
+                    }
+
+                    players[i].setTwopair(new int[]{p, q, r});
+
+                }
+
             }
         }
     }
 
 
 
-    }
+}

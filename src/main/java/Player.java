@@ -24,6 +24,8 @@ public class Player {
     public void setPlayerhand(int[] [] Playerhand1){this.Playerhand = Playerhand1;}
     public int[][]getPlayerhand(){return Playerhand;}
 
+
+
     public Boolean Straight;
     public void setStraight(Boolean Straight1){this.Straight = Straight1;}
     public Boolean getStraight(){return Straight;}
@@ -31,7 +33,9 @@ public class Player {
     public void setFlush(Boolean Flush1){this.Straight = Flush1;}
     public Boolean getFlush(){return Flush;}
 
-
+    public int[] twopair;
+    public void setTwopair(int[] twopair1){this.twopair=twopair1;}
+    public int[] getTwopair(){return twopair;}
 
 
 
