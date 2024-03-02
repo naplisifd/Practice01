@@ -31,7 +31,7 @@ public class Player {
     public Boolean getStraight(){return Straight;}
 
     public Boolean Flush;
-    public void setFlush(Boolean Flush1){this.Straight = Flush1;}
+    public void setFlush(Boolean Flush1){this.Flush = Flush1;}
     public Boolean getFlush(){return Flush;}
 
 
@@ -40,13 +40,21 @@ public class Player {
     public int[] getTwopair(){return twopair;}
 
     public int[] threepair;
-    public void setThreepair(int[] threepair1){this.twopair=threepair1;}
+    public void setThreepair(int[] threepair1){this.threepair=threepair1;}
     public int[] getThreepair(){return threepair;}
 
     public int[] fourpair;
     public void setfourpair(int[] fourpair1){this.twopair=fourpair1;}
     public int[] getfourpair(){return fourpair;}
 
+    public boolean fullhouse;
+    public void setfullhouse(boolean fullhouse1){this.fullhouse=fullhouse1;}
+    public boolean getfullhouse(){return fullhouse;}
+
+
+    public int points;
+    public void setPoints(int points1){this.points=points1;}
+    public int getPoints(){return points;}
 
     public static int[] Raise(int chips, int dchips, boolean allin){
         int raiseamount = 0;

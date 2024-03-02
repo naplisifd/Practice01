@@ -100,6 +100,11 @@ public class Main {
 
                 }
             }
+            if(stage==4*pcount){
+                wincheck(players, pcount, shuffled);
+                gameover=true;
+                break;
+            }
 
 
             for (int i=0; i<pcount; i++) {
@@ -243,22 +248,64 @@ public class Main {
         return suite;
     }
 
+    public static void wincheck(Player[] players, int pcount, int[][] shuffled){
+        twopair_checker(players, shuffled, pcount);
+        threepair_checker(players, shuffled, pcount);
+        fourpair_checker(players, shuffled, pcount);
+        straight_checker(players, shuffled, pcount);
+        flush_checker(players, shuffled, pcount);
+        house_checker(players, shuffled, pcount);
 
+        /*
+        for (int i=0; i<pcount; i++){
+            System.out.println("p"+i);
+            System.out.println(players[i].Flush);
+            System.out.println(players[i].Straight);
+            System.out.println(players[i].twopair);
+            System.out.println(players[i].threepair);
+            System.out.println(players[i].fourpair);
+            System.out.println(players[i].fullhouse);
+        }*/
 
-    public static void comb_checker( Player[] players, int[][] shuffled){
-        flush_checker(players, shuffled);
+        for (int i=0; i<pcount; i++){
+            players[i].setPoints(0);
+            if (players[i].twopair[0]>0){
+                players[i].points++;
+            }
+            if (players[i].threepair[0]>0){
+                players[i].points=players[i].points+2;
+            }
+            if (players[i].Straight==true){
+                players[i].points=players[i].points+3;
+            }
+            if (players[i].Flush==true){
+                players[i].points=players[i].points+4;
+            }
+            if (players[i].fullhouse==true){
+                players[i].points=players[i].points+4;
+            }
+
+        }
+
+        //fix for more than 2 later
+        if (players[0].points>players[1].points){
+            System.out.println("p1 wins");
+        }else{
+            System.out.println("p2 wins");
+        }
     }
 
 
-    public static void flush_checker( Player[] players, int[][] shuffled){
+    public static void flush_checker( Player[] players, int[][] shuffled, int pcount){
         int clubchecker =0;
         int heartchecker =0;
         int diamondchecker =0;
         int spadechecker=0;
 
 
-        for (int i=1; i<5; i++){
-            for (int x=0; x<2; x++){
+        for (int i=0; i<pcount; i++){
+            players[i].setFlush(false);
+            for (int x=0; x<pcount; x++){
                 String suit =pSuitconverter(1, x, players,i);
                 switch (suit){
                     case "club":
@@ -301,13 +348,14 @@ public class Main {
         }
     }
 
-    public static void straight_checker( Player[] players, int[][] shuffled){
-        for (int i=1; i<5; i++) {
+    public static void straight_checker( Player[] players, int[][] shuffled, int pcount){
+        for (int i=0; i<pcount; i++) {
+            players[i].setStraight(false);
             int consec =0;
             int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0]};
             Arrays.sort(numbers);
 
-            for (int x=0; x<7;x++){
+            for (int x=0; x<6;x++){
                 if (numbers[x]==numbers[x+1]-1){
                     consec++;
                 }
@@ -320,15 +368,16 @@ public class Main {
         }
     }
 
-    public static void twopair_checker(Player[] players, int[][] shuffled){
+    public static void twopair_checker(Player[] players, int[][] shuffled, int pcount){
         int checker=0;
         int p=0;
         int q=0;
         int r=0;
 
 
-        for (int i=1; i<5; i++) {
-            int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0],0};
+        for (int i=0; i<pcount; i++) {
+            players[i].setTwopair(new int[]{-2, -4, -6});
+            int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0],0,0};
             Arrays.sort(numbers);
             for (int x=0; x<7;x++){
 
@@ -357,14 +406,15 @@ public class Main {
     }
 
 
-    public static void threepair_checker(Player[] players, int[][] shuffled){
+    public static void threepair_checker(Player[] players, int[][] shuffled, int pcount){
         int checker=0;
         int p=0;
         int q=0;
 
 
-        for (int i=1; i<5; i++) {
-            int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0],0,0};
+        for (int i=0; i<pcount; i++) {
+            players[i].setThreepair(new int[]{-4, -8});
+            int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0],0,0,0};
             Arrays.sort(numbers);
             for (int x=0; x<7;x++){
 
@@ -390,10 +440,10 @@ public class Main {
         }
     }
 
-    public static void fourpair_checker(Player[] players, int[][] shuffled){
+    public static void fourpair_checker(Player[] players, int[][] shuffled, int pcount){
         int p=0;
 
-        for (int i=1; i<5; i++) {
+        for (int i=0; i<pcount; i++) {
             int[] numbers = new int[]{players[i].Playerhand[0][0], players[i].Playerhand[1][0], shuffled[51][0], shuffled[50][0], shuffled[49][0], shuffled[48][0], shuffled[47][0],0,0};
             Arrays.sort(numbers);
             for (int x=0; x<7;x++){
@@ -403,6 +453,14 @@ public class Main {
                     players[i].setfourpair(new int[]{p});
                 }
 
+            }
+        }
+    }
+
+    public static void house_checker(Player[] players, int[][] shuffled, int pcount){
+        for (int i=0; i<pcount; i++){
+            if (players[i].twopair[0]>0 && players[i].threepair[0]>0){
+                players[i].setfullhouse(true);
             }
         }
     }
