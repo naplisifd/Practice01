@@ -29,15 +29,23 @@ public class Player {
     public Boolean Straight;
     public void setStraight(Boolean Straight1){this.Straight = Straight1;}
     public Boolean getStraight(){return Straight;}
+
     public Boolean Flush;
     public void setFlush(Boolean Flush1){this.Straight = Flush1;}
     public Boolean getFlush(){return Flush;}
+
 
     public int[] twopair;
     public void setTwopair(int[] twopair1){this.twopair=twopair1;}
     public int[] getTwopair(){return twopair;}
 
+    public int[] threepair;
+    public void setThreepair(int[] threepair1){this.twopair=threepair1;}
+    public int[] getThreepair(){return threepair;}
 
+    public int[] fourpair;
+    public void setfourpair(int[] fourpair1){this.twopair=fourpair1;}
+    public int[] getfourpair(){return fourpair;}
 
 
     public static int[] Raise(int chips, int dchips, boolean allin){
