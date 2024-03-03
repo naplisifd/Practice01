@@ -14,7 +14,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-        int[][] shuffled =dealer.deckmaker();
         Scanner input = new Scanner(System.in);
         System.out.println("how many players, max 5");
         //takes count
@@ -35,9 +34,12 @@ public class Main {
         //sets every player to have 500 chips and to be in the game
         for (int w=0; w<pcount; w++){
             players[w].setchips(500);
-            players[w].setIn_game(true);
         }
 
+        int[][] shuffled =dealer.deckmaker();
+        for (int v=0; v>pcount; v++){
+            players[v].setIn_game(true);
+        }
 
         int minraise = 0;
         System.out.println("the pot starts with " +middle.chips +" chips");
@@ -271,9 +273,18 @@ public class Main {
             players[i].setPoints(0);
             if (players[i].twopair[0]>0){
                 players[i].points++;
+                if (players[i].twopair[1]>0){
+                    players[i].points++;
+                }
+                if (players[i].twopair[2]>0){
+                    players[i].points++;
+                }
             }
             if (players[i].threepair[0]>0){
                 players[i].points=players[i].points+2;
+                if (players[i].threepair[1]>0){
+                    players[i].points=players[i].points+2;
+                }
             }
             if (players[i].Straight==true){
                 players[i].points=players[i].points+3;
@@ -286,6 +297,54 @@ public class Main {
             }
 
         }
+
+
+        if (players[0].points==players[1].points){
+            if(players[0].fourpair[0]!=0) {
+                if (players[0].fourpair[0] > players[1].fourpair[0]) {
+                    players[0].points++;
+                }else{
+                    players[1].points++;
+                }
+            }
+
+            else if(players[0].fullhouse==true){
+                if (players[0].threepair[0] > players[1].threepair[0] && players[0].threepair[0]>players[1].threepair[1] ||players[0].threepair[1]>players[1].threepair[1] ) {
+                    players[0].points++;
+                }else if (players[0].threepair[0] < players[1].threepair[0] && players[0].threepair[0]<players[1].threepair[1] ||players[0].threepair[1]<players[1].threepair[1]) {
+                    players[1].points++;
+                }
+                else{
+                    Arrays.sort(players[0].twopair);
+                    Arrays.sort(players[1].twopair);
+                    if(players[0].twopair[0]>players[1].twopair[0]){
+                        players[0].points++;
+                    } else if (players[0].twopair[0]<players[1].twopair[0]) {
+                        players[1].points++;
+                    }
+                    else {
+                        System.out.println("tie");
+                    }
+                }
+            } else if(players[0].twopair[0]!=0){
+                Arrays.sort(players[0].twopair);
+                Arrays.sort(players[1].twopair);
+                if(players[0].twopair[0]>players[1].twopair[0]){
+                    players[0].points++;
+                } else if (players[0].twopair[0]<players[1].twopair[0]) {
+                    players[1].points++;
+                }
+            }
+
+            else if(players[0].threepair[0]!=0){
+                if (players[0].threepair[0] > players[1].threepair[0] && players[0].threepair[0]>players[1].threepair[1] ||players[0].threepair[1]>players[1].threepair[1] ) {
+                    players[0].points++;
+                }else{
+                    players[1].points++;
+                }
+            }
+        }
+
 
         //fix for more than 2 later
         if (players[0].points>players[1].points){
@@ -450,8 +509,8 @@ public class Main {
 
                 if (numbers[x] == numbers[x+1] && numbers[x]==numbers[x+2] && numbers[x+3]==numbers[x]){
                     p = numbers[x];
-                    players[i].setfourpair(new int[]{p});
                 }
+                players[i].setfourpair(new int[]{p});
 
             }
         }
