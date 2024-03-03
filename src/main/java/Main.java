@@ -62,7 +62,10 @@ public class Main {
             //sets player attribute
             players[y-2].setPlayerhand(phand);
             System.out.println("player" +y+" starts with " + players[y-2].chips + " chips and the cards");
-
+            String suit = pSuitconverter(1,0, players, y);
+            System.out.println(players[y].Playerhand[0][0] + " of "+ suit);
+            suit = pSuitconverter(1,1, players, y);
+            System.out.println(players[y].Playerhand[1][0] + " of "+ suit);
 
         }
         int stage = 0;
@@ -105,7 +108,7 @@ public class Main {
             if(stage==4*pcount){
                 wincheck(players, pcount, shuffled);
                 gameover=true;
-                break;
+
             }
 
 
@@ -349,8 +352,12 @@ public class Main {
         //fix for more than 2 later
         if (players[0].points>players[1].points){
             System.out.println("p1 wins");
+            player1.chips= player1.chips+middle.chips;
+            middle.chips=0;
         }else{
             System.out.println("p2 wins");
+            player2.chips= player2.chips+middle.chips;
+            middle.chips=0;
         }
     }
 

@@ -44,7 +44,7 @@ public class Player {
     public int[] getThreepair(){return threepair;}
 
     public int[] fourpair;
-    public void setfourpair(int[] fourpair1){this.twopair=fourpair1;}
+    public void setfourpair(int[] fourpair1){this.fourpair=fourpair1;}
     public int[] getfourpair(){return fourpair;}
 
     public boolean fullhouse;
