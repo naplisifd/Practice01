@@ -14,6 +14,7 @@ public class Main {
     public static void main(String[] args) {
 
 
+
         Scanner input = new Scanner(System.in);
         System.out.println("how many players, max 5");
         //takes count
@@ -29,7 +30,9 @@ public class Main {
         players[4]=player5;
         //dealer starts with 0
         middle.setDealerchips(0);
-
+        for (int v=0; v>pcount; v++){
+            players[v].setIn_game(true);
+        }
 
         //sets every player to have 500 chips and to be in the game
         for (int w=0; w<pcount; w++){
@@ -37,9 +40,7 @@ public class Main {
         }
 
         int[][] shuffled =dealer.deckmaker();
-        for (int v=0; v>pcount; v++){
-            players[v].setIn_game(true);
-        }
+
 
         int minraise = 0;
         System.out.println("the pot starts with " +middle.chips +" chips");
@@ -61,12 +62,7 @@ public class Main {
 
             //sets player attribute
             players[y-2].setPlayerhand(phand);
-            System.out.println("player" +y+" starts with " + players[y-2].chips + " chips and the cards");
-            String suit = pSuitconverter(1,0, players, y);
-            System.out.println(players[y].Playerhand[0][0] + " of "+ suit);
-            suit = pSuitconverter(1,1, players, y);
-            System.out.println(players[y].Playerhand[1][0] + " of "+ suit);
-
+            System.out.println("player " +(y-1)+" starts with " + players[y-2].chips);
         }
         int stage = 0;
         boolean gameover = false;
@@ -108,6 +104,7 @@ public class Main {
             if(stage==4*pcount){
                 wincheck(players, pcount, shuffled);
                 gameover=true;
+                break;
 
             }
 
@@ -120,9 +117,11 @@ public class Main {
                 //makes object current player which is whatever object players[i]
                 Player currentPlayer = players[i];
 
-
+                for (int v=0; v<pcount; v++){
+                    players[v].setIn_game(true);
+                }
                 turn_over = false;
-                while (turn_over == false /*is players turn*/ && players[i].In_game==true/*player hasn't folded*/) {
+                while (turn_over == false && players[i].In_game==true) {
                     System.out.println("it is player "+(i+1)+"'s turn");
                     System.out.println("input anything when that player has the computer");
                     //holds until something is inputted
@@ -261,43 +260,41 @@ public class Main {
         flush_checker(players, shuffled, pcount);
         house_checker(players, shuffled, pcount);
 
-        /*
-        for (int i=0; i<pcount; i++){
-            System.out.println("p"+i);
-            System.out.println(players[i].Flush);
-            System.out.println(players[i].Straight);
-            System.out.println(players[i].twopair);
-            System.out.println(players[i].threepair);
-            System.out.println(players[i].fourpair);
-            System.out.println(players[i].fullhouse);
-        }*/
 
         for (int i=0; i<pcount; i++){
             players[i].setPoints(0);
             if (players[i].twopair[0]>0){
                 players[i].points++;
+                players[i].points++;
                 if (players[i].twopair[1]>0){
+                    players[i].points++;
                     players[i].points++;
                 }
                 if (players[i].twopair[2]>0){
                     players[i].points++;
+                    players[i].points++;
                 }
             }
             if (players[i].threepair[0]>0){
-                players[i].points=players[i].points+2;
+                players[i].points=players[i].points+3;
                 if (players[i].threepair[1]>0){
-                    players[i].points=players[i].points+2;
+                    players[i].points=players[i].points+3;
                 }
             }
             if (players[i].Straight==true){
-                players[i].points=players[i].points+3;
+                players[i].points=players[i].points+4;
             }
             if (players[i].Flush==true){
-                players[i].points=players[i].points+4;
+                players[i].points=players[i].points+5;
             }
             if (players[i].fullhouse==true){
-                players[i].points=players[i].points+4;
+                players[i].points=players[i].points+6;
             }
+            if (players[i].fourpair[0]!=0){
+                players[i].points=players[i].points+7;
+            }
+
+
 
         }
 
