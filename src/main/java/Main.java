@@ -294,6 +294,17 @@ public class Main {
                 players[i].points=players[i].points+7;
             }
 
+            if(players[0].points==0 && players[1].points==0){
+                int[] p1num = {players[0].Playerhand[0][0], players[0].Playerhand[0][1]};
+                Arrays.sort(p1num);
+                int[] p2num={players[1].Playerhand[0][0], players[1].Playerhand[0][1]};
+                Arrays.sort(p2num);
+                if (p1num[0]>p2num[0]){
+                    players[0].points++;
+                } else if (p2num[0]>p1num[0]) {
+                    players[1].points++;
+                }
+            }
 
 
         }
