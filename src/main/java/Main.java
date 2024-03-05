@@ -263,6 +263,7 @@ public class Main {
 
         for (int i=0; i<pcount; i++){
             players[i].setPoints(0);
+
             if (players[i].twopair[0]>0){
                 players[i].points++;
                 players[i].points++;
@@ -275,12 +276,14 @@ public class Main {
                     players[i].points++;
                 }
             }
+
             if (players[i].threepair[0]>0){
                 players[i].points=players[i].points+3;
                 if (players[i].threepair[1]>0){
                     players[i].points=players[i].points+3;
                 }
             }
+
             if (players[i].Straight==true){
                 players[i].points=players[i].points+4;
             }
@@ -294,23 +297,27 @@ public class Main {
                 players[i].points=players[i].points+7;
             }
 
-            if(players[0].points==0 && players[1].points==0){
+            if(players[0].points==0 && players[1].points==0){//if both have nothing
+                //puts highest card in [0]
                 int[] p1num = {players[0].Playerhand[0][0], players[0].Playerhand[0][1]};
                 Arrays.sort(p1num);
                 int[] p2num={players[1].Playerhand[0][0], players[1].Playerhand[0][1]};
                 Arrays.sort(p2num);
+
                 if (p1num[0]>p2num[0]){
                     players[0].points++;
                 } else if (p2num[0]>p1num[0]) {
                     players[1].points++;
                 }
+
             }
 
 
         }
 
-
+        //if tie
         if (players[0].points==players[1].points){
+            //if either has 4 pair
             if(players[0].fourpair[0]!=0) {
                 if (players[0].fourpair[0] > players[1].fourpair[0]) {
                     players[0].points++;
@@ -319,32 +326,29 @@ public class Main {
                 }
             }
 
+                //uses else if in order of value, so if it has 3 and 2 pair it will only compair 3 pair
             else if(players[0].fullhouse==true){
                 if (players[0].threepair[0] > players[1].threepair[0] && players[0].threepair[0]>players[1].threepair[1] ||players[0].threepair[1]>players[1].threepair[1] ) {
-                    players[0].points++;
-                }else if (players[0].threepair[0] < players[1].threepair[0] && players[0].threepair[0]<players[1].threepair[1] ||players[0].threepair[1]<players[1].threepair[1]) {
-                    players[1].points++;
+                    players[0].points++; //if the three pair of player 0 is higher
                 }
+                else if (players[0].threepair[0] < players[1].threepair[0] && players[0].threepair[0]<players[1].threepair[1] ||players[0].threepair[1]<players[1].threepair[1]) {
+                    players[1].points++; //if the three pair of p1 is higher
+                }
+                //if both have the same 3 pair compares 2 pairs
                 else{
                     Arrays.sort(players[0].twopair);
                     Arrays.sort(players[1].twopair);
                     if(players[0].twopair[0]>players[1].twopair[0]){
                         players[0].points++;
-                    } else if (players[0].twopair[0]<players[1].twopair[0]) {
+                    }
+                    else if (players[0].twopair[0]<players[1].twopair[0]) {
                         players[1].points++;
                     }
                     else {
                         System.out.println("tie");
                     }
                 }
-            } else if(players[0].twopair[0]!=0){
-                Arrays.sort(players[0].twopair);
-                Arrays.sort(players[1].twopair);
-                if(players[0].twopair[0]>players[1].twopair[0]){
-                    players[0].points++;
-                } else if (players[0].twopair[0]<players[1].twopair[0]) {
-                    players[1].points++;
-                }
+
             }
 
             else if(players[0].threepair[0]!=0){
@@ -354,6 +358,18 @@ public class Main {
                     players[1].points++;
                 }
             }
+
+            else if(players[0].twopair[0]!=0){
+                Arrays.sort(players[0].twopair);
+                Arrays.sort(players[1].twopair);
+                if(players[0].twopair[0]>players[1].twopair[0]){
+                    players[0].points++;
+                } else if (players[0].twopair[0]<players[1].twopair[0]) {
+                    players[1].points++;
+                }
+
+            }
+
         }
 
 
